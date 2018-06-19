@@ -15,6 +15,7 @@ db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 var index = require('./routes/index');
 var mkRoutes = require('./routes/mk');
+var toolsRoutes = require('./routes/tools');
 global.__basedir = __dirname;
 
 var app = express();
@@ -34,6 +35,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', index);
 app.use('/mk', mkRoutes);
+app.use('/tools', toolsRoutes);
 
 app.post('/data', function (req, res) {
   console.log(req.body);
