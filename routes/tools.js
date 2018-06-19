@@ -29,7 +29,7 @@ router.post('/slackevents', function(req, res){
     }
   })
   console.log(JSON.stringify(req.body));
-  res.status(200);
+  res.sendStatus(200);
 })
 
 module.exports = router;
