@@ -34,8 +34,8 @@ router.post('/slackevents', function(req, res){
       console.log("saved event to db");
     }
   })
-  if (newSlackEvent.event.type == "reaction_added") {
-    var logMessage = ("REACTION ADDED TO SLACK! \n User " + newSlackEvent.event.user + " added a " + newSlackEvent.event.reaction + " in response to " + newSlackEvent.event.item_user + "'s " + newSlackEvent.event.item.type + ".\n\nIs this right?\n")
+  if (newSlackEvent.event.user !== "UB93JCJL8" && newSlackEvent.event.type == "reaction_added") {
+    var logMessage = ("REACTION ADDED TO SLACK! \n User " + newSlackEvent.event.user + " added a :" + newSlackEvent.event.reaction + " in response to " + newSlackEvent.event.item_user + "'s " + newSlackEvent.event.item.type + ".\n\nIs this right?\n")
     console.log(logMessage);
     web.chat.postMessage({ channel: reactionLogChannel, text: logMessage })
   .then((res) => {
