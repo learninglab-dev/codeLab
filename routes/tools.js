@@ -28,6 +28,9 @@ router.post('/slackevents', function(req, res){
       console.log("saved event to db");
     }
   })
+  if (newSlackEvent.event.type == "reaction added") {
+    console.log("REACTION ADDED TO SLACK! \n User " + newSlackEvent.event.user + " added a " + newSlackEvent.event.reaction + " in response to " + newSlackEvent.event.item_user + "'s " + newSlackEvent.event.item.type + ".\n\nIs this right?\n");
+  }
   console.log(JSON.stringify(req.body));
   res.sendStatus(200);
 })
