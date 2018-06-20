@@ -2,6 +2,12 @@ const express = require('express');
 const router = express.Router();
 const fs = require('fs');
 const path = require('path');
+const { WebClient } = require('@slack/client');
+const token = process.env.XSLACK_TOKEN;
+const web = new WebClient(token);
+const reactionLogChannel = 'CBAST7RGF';
+
+
 // var Marker = require('../models/marker.js');
 // var Io2sRequest = require('../models/io2s_request.js');
 // var User = require('../models/user.js');
@@ -29,7 +35,14 @@ router.post('/slackevents', function(req, res){
     }
   })
   if (newSlackEvent.event.type == "reaction_added") {
-    console.log("REACTION ADDED TO SLACK! \n User " + newSlackEvent.event.user + " added a " + newSlackEvent.event.reaction + " in response to " + newSlackEvent.event.item_user + "'s " + newSlackEvent.event.item.type + ".\n\nIs this right?\n");
+    var logMessage = ("REACTION ADDED TO SLACK! \n User " + newSlackEvent.event.user + " added a " + newSlackEvent.event.reaction + " in response to " + newSlackEvent.event.item_user + "'s " + newSlackEvent.event.item.type + ".\n\nIs this right?\n")
+    console.log(logMessage);
+    web.chat.postMessage({ channel: reactionLogChannel, text: logMessage })
+  .then((res) => {
+    // `res` contains information about the posted message
+    console.log('Message sent: ', res.ts);
+  })
+  .catch(console.error);
   }
   res.sendStatus(200);
 })
