@@ -5,6 +5,7 @@ const fs = require('fs');
 const path = require('path');
 const videos = require('../data/json/videos.json');
 const mk_links_list = require('../data/json/mk_links.json');
+const timelineData = require('../data/json/timeline.json');
 var Marker = require('../models/marker.js');
 var User = require('../models/user.js');
 var SlackEvent = require('../models/slack_event.js');
@@ -63,5 +64,8 @@ router.post('/tokensignin', function(req, res, next) {
 
 });
 
+router.get('/timeline-convert', function(req, res, next) {
+  res.render('pretty-timeline-data', {title: "Pretty Timeline Data", data: timelineData});
+})
 
 module.exports = router;
