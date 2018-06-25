@@ -28,11 +28,11 @@ router.get('/', function(req, res, next) {
 });
 
 router.get('/', function(req, res, next) {
-    res.render('tool', {title: "CSV Converter", , instructions: ""});
+    res.render('tool', {title: "CSV Converter", instructions: "coming", links:toolLinks});
 });
 
 router.get('/', function(req, res, next) {
-    res.render('tool', {title: "Timeline Converter"});
+    res.render('tool', {title: "Timeline Converter", instructions:"coming", links:toolLinks});
 });
 router.post('/slackinteraction', function(req, res, next) {
   console.log(JSON.stringify(req.body, null, 4));
