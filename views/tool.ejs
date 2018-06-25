@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title><%= title %></title>
+    <link rel='stylesheet' href='/css/style.css' />
+  </head>
+  <body>
+    <h1><%= title %></h1>
+    <p>Welcome to <%= title %></p>
+    <p>
+      <%= instructions %>
+    </p>
+    
+    
+    
+    <ol>
+      <% for (i=0; i<links.length; i++) { %>
+        <li>
+          <a href= <%= links[i].url %> ><%- links[i].title %> </a>
+        </li>
+      <% }  %>
+    </ol>
+  </body>
+</html>

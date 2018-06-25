@@ -7,17 +7,33 @@ const token = process.env.XSLACK_TOKEN;
 const web = new WebClient(token);
 const reactionLogChannel = 'CBAST7RGF';
 
-
 // var Marker = require('../models/marker.js');
 // var Io2sRequest = require('../models/io2s_request.js');
 // var User = require('../models/user.js');
 var SlackEvent = require('../models/slack_event.js');
+var toolLinks = [
+    {
+      "title": "csv converter",
+      "url": "/tools/csv"
+    },
+    {
+      "title": "timeline converter",
+      "url": "/tools/timeline"
+    }
+  ];
 
-/* GET home page. */
-// router.get('/', function(req, res, next) {
-//     res.send('index');
-// });
+router.get('/', function(req, res, next) {
+    res.render('index', {title: "Tools", links: toolLinks
+    });
+});
 
+router.get('/', function(req, res, next) {
+    res.render('tool', {title: "CSV Converter", , instructions: ""});
+});
+
+router.get('/', function(req, res, next) {
+    res.render('tool', {title: "Timeline Converter"});
+});
 router.post('/slackinteraction', function(req, res, next) {
   console.log(JSON.stringify(req.body, null, 4));
   res.send("got it");
