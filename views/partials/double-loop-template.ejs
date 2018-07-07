@@ -1,0 +1,10 @@
+<% for (var i = 0; i < data.length; i++) {  %>
+  <h2>id = <%= data[i].id %></h2>
+  <ul>
+    <% for (var j = 0; j < props.length; j++) { %>
+      <li>
+        <strong><%= props[j] %>:</strong> <%= data[i][(props[j])] %>
+      </li>
+    <% } %>
+  </ul>
+<%  } %>

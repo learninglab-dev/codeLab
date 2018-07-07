@@ -54,5 +54,9 @@
   {
     "title": "mk",
     "url": "/mk"
+  },
+  {
+    "title": "get request test 20180706",
+    "url": "/tests/getrequest/datawouldgohere"
   }
 ]

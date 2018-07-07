@@ -1,11 +1,13 @@
 const express = require('express');
 const router = express.Router();
 const fs = require('fs');
+const request = require('request');
 const path = require('path');
 const { WebClient } = require('@slack/client');
 const token = process.env.XSLACK_TOKEN;
 const web = new WebClient(token);
 const reactionLogChannel = 'CBAST7RGF';
+const timelineData = require('../data/json/timeline.json');
 
 // var Marker = require('../models/marker.js');
 // var Io2sRequest = require('../models/io2s_request.js');
@@ -19,6 +21,10 @@ var toolLinks = [
     {
       "title": "timeline converter",
       "url": "/tools/timeline"
+    },
+    {
+      "title": "pretty-print timeline data",
+      "url": "/tools/timeline-convert"
     }
   ];
 
@@ -31,9 +37,14 @@ router.get('/', function(req, res, next) {
     res.render('tool', {title: "CSV Converter", instructions: "coming", links:toolLinks});
 });
 
-router.get('/', function(req, res, next) {
+router.get('/timeline-printer', function(req, res, next) {
     res.render('tool', {title: "Timeline Converter", instructions:"coming", links:toolLinks});
 });
+
+router.get('/timeline-convert', function(req, res, next) {
+  res.render('pretty-timeline-data', {title: "Pretty Timeline Data", data: timelineData});
+})
+
 router.post('/slackinteraction', function(req, res, next) {
   console.log(JSON.stringify(req.body, null, 4));
   res.send("got it");
@@ -61,6 +72,37 @@ router.post('/slackevents', function(req, res){
   .catch(console.error);
   }
   res.sendStatus(200);
+})
+
+router.post('/timeline-machine/post', function(req, res, next){
+  res.send('got it, and here is your URL: ' + url);
+});
+
+router.get('/timeline-machine/sheet/:theSheet/range/:range', function(req, res, next){
+  console.log("got your request with req.params = " + JSON.stringify(req.params) + " and req.query = " + (req.query ? JSON.stringify(req.query) : "{}"));
+  var theUrl = ("https://sheets.googleapis.com/v4/spreadsheets/"
+    + req.params.theSheet + "/values/"
+    + req.params.range + "?key="
+    + process.env.GOOGLE_API_KEY);
+  console.log(theUrl);
+  request(theUrl, function(err, res2, body) {
+    var theResult = JSON.parse(body);
+    var theResultObjects = [];
+    var theProps = [];
+    for (var i = 0; i < theResult.values[0].length; i++) {
+      theProps.push(theResult.values[0][i]);
+    }
+    for (var i = 1; i < theResult.values.length; i++) {
+      var newElement = {id: i};
+      for (var j = 0; j < theResult.values[0].length; j++) {
+        newElement[theResult.values[0][j]]=theResult.values[i][j];
+      }
+      theResultObjects.push(newElement)
+    }
+    console.log(JSON.stringify(theResult, null, 4));
+    console.log(JSON.stringify(theResultObjects, null, 4));
+    res.render('pretty-timeline-data', {title: "your timeline", props: theProps, data: theResultObjects})
+  });
 })
 
 module.exports = router;

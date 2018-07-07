@@ -12,38 +12,14 @@
     <p>Welcome to <%= title %></p>
 
       <% for (var i = 0; i < data.length; i++) {  %>
-        <h2><%= data[i].Headline %></h2>
-        <% if (data[i].Media) { %>
-          <p>
-            will insert some media from <%= data[i].Media %>
-          </p>
-          <img src= https://farm2.staticflickr.com/1764/41096183130_3d8cd522a2_z.jpg />
+        <h2>id = <%= data[i].id %></h2>
+        <ul>
+          <% for (var j = 0; j < props.length; j++) { %>
+            <li>
+              <strong><%= props[j] %>:</strong> <%= data[i][(props[j])] %>
+            </li>
+          <% } %>
+        </ul>
       <%  } %>
-        <p>
-          <%= data[i].Text %>
-        </p>
-        <ol>
-        <li>Year =
-            <%= data[i].Year %>
-        </li>
-        <li> Month =
-            <%= data[i].Month %>
-        </li>
-        <li>Day =
-            <%= data[i].Day %>
-        </li>
-        <li>Background =
-            <%= data[i].Background %>
-        </li>
-        <li>Thing =
-            <%= data[i].Thing %>
-        </li>
-        </ol>
-      <%  } %>
-
-<p>
-  <a href="https://www.google.com">Google Here!!!!</a>
-</p>
-
   </body>
 </html>
