@@ -75,6 +75,8 @@ router.post('/slackevents', function(req, res){
 })
 
 router.post('/timeline-machine/post', function(req, res, next){
+  var url = "your url, ultimately";
+  console.log(JSON.stringify(req.body, null, 4));
   res.send('got it, and here is your URL: ' + url);
 });
 
