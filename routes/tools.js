@@ -75,7 +75,7 @@ router.post('/slackevents', function(req, res){
 })
 
 router.post('/timeline-machine/post', function(req, res, next){
-  var url = "your url, ultimately";
+  var url = "https://codelab.learninglab.xyz/tools/timeline-machine/sheet/"+ req.body.text +"/range/A1:W100?options=false";
   console.log(JSON.stringify(req.body, null, 4));
   res.send('got it, and here is your URL: ' + url);
 });
