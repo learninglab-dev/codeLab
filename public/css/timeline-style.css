@@ -1,0 +1,21 @@
+body {
+  font-family: "Avenir Next";
+  width: 70%;
+  margin: auto;
+}
+
+h1 {
+  font-family: "Futura";
+  font-size: 40px;
+  letter-spacing: 5px;
+  text-transform: uppercase;
+}
+
+.the-elements {
+  width: 90%;
+  margin: auto;
+}
+
+strong {
+  font-weight: 700;
+}

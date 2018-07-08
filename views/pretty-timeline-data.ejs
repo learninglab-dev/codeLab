@@ -3,12 +3,17 @@
   <head>
     <title><%= title %></title>
     <link rel='stylesheet' href='/css/style.css' />
+    <link rel='stylesheet' href='/css/timeline-style.css' />
   </head>
   <body>
     <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+    <p>Welcome to <%= title %>.  This template is under construction.</p>
+    <p>
+      At present, this is an extremely bare bones tool that reads the first row of your Google sheet to get the properties of your objects, then it assumes that from the second row on we have an object for each row.  It builds up an array on the server side and then sends that into an ejs template that loops through all the objects (and through all the properties of each object) to generate the following list of lists.
+    </p>
+    <div class="the-elements">
       <% for (var i = 0; i < data.length; i++) {  %>
-        <h2>id = <%= data[i].id %></h2>
+        <h2>element <%= data[i].id %></h2>
         <ul>
           <% for (var j = 0; j < props.length; j++) { %>
             <li>
@@ -17,5 +22,6 @@
           <% } %>
         </ul>
       <%  } %>
+    </div>
   </body>
 </html>
