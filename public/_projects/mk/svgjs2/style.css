@@ -1,0 +1,10 @@
+.square {
+  height: 10px;
+  width: 10px;
+  background-color: red;
+  border-radius: 2px;
+}
+
+.blue {
+  background-color: blue;
+}

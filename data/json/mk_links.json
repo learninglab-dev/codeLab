@@ -63,5 +63,9 @@
   {
     "title": "Timeline Experiment",
     "url": "/mk/timeline-convert"
+  },
+  {
+    "title": "svg.js Experiment",
+    "url": "/_projects/mk/svgjs"
   }
 ]
