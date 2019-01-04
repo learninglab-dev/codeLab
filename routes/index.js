@@ -10,7 +10,6 @@ var SlackEvent = require('../models/slack_event.js');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
-
     res.render('index', { title: 'codeLab', links: links_list });
 });
 
